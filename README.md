@@ -2,6 +2,13 @@
 Test application for callstats.io
 Problem description bellow.
 
+### Usage
+```
+go get github.com/irlndts/go-callstats
+go build
+./go-callstats --slider=<size-of-slider> --input=<path-to-input-file> --output=<path-to-output-file>
+```
+
 The algorithm is to use two heaps to keep lower and higher halfs of metrics separately. The median is the lowest value of the higher heap or (higher value of lower + the lowest value of the higher heap)/2
 And also there is a queue to keep data in slider range.
 
