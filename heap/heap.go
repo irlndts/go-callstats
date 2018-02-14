@@ -37,7 +37,7 @@ func NewMaxHeap() *MaxHeap {
 	return pq
 }
 
-// MinHeap is a max heap of ints.
+// MinHeap is a min heap of ints.
 type MinHeap []int
 
 func (h MinHeap) Len() int           { return len(h) }

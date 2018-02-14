@@ -25,21 +25,24 @@ func InitMedianQueue(size int) *Median {
 // AddDelay adds a delay to the slice
 func (m *Median) AddDelay(delay int) {
 	heap.Push(m.MaxHeap, delay)
-	//heap.Push(m.MinHeap, int(m.MaxHeap.Top()))
-	//heap.Pop(m.MaxHeap)
+	heap.Push(m.MinHeap, m.MaxHeap.Top())
+	heap.Pop(m.MaxHeap)
 
-	if m.MaxHeap.Len() > m.MinHeap.Len() {
-		heap.Push(m.MinHeap, heap.Pop(m.MaxHeap))
+	if m.MaxHeap.Len() < m.MinHeap.Len() {
+		heap.Push(m.MaxHeap, m.MinHeap.Top())
+		heap.Pop(m.MinHeap)
 	}
-	fmt.Println("Min Heap", m.MinHeap)
-	fmt.Println("Max Heap", m.MaxHeap)
+	fmt.Println("Max heap: ", m.MaxHeap)
+	fmt.Println("Min heap: ", m.MinHeap)
 }
 
 // GetMedian returns a median value of the slice
 func (m Median) GetMedian() float64 {
-	if m.MinHeap.Len() > m.MaxHeap.Len() {
-		return float64(m.MinHeap.Top())
+	if m.MinHeap.Len()+m.MaxHeap.Len() <= 1 {
+		return float64(-1)
 	}
-
+	if m.MinHeap.Len() < m.MaxHeap.Len() {
+		return float64(m.MaxHeap.Top())
+	}
 	return float64(m.MaxHeap.Top()+m.MinHeap.Top()) * 0.5
 }
