@@ -24,7 +24,6 @@ func init() {
 }
 
 func main() {
-
 	// check input parameters
 	if slider == 0 || input == "" || output == "" {
 		flag.Usage()
@@ -55,6 +54,7 @@ func main() {
 		line, err := reader.Read()
 		if err != nil {
 			if err == io.EOF {
+				// end of file
 				break
 			}
 			fmt.Fprintf(os.Stderr, "failed to read csv: %s", err)
@@ -68,10 +68,10 @@ func main() {
 				fmt.Fprintf(os.Stderr, "failed to read column: %d line: %d: %s", c, l, err)
 			}
 
-			// add delay to slider
+			// add delay to the slider
 			median.AddDelay(data)
 
-			// write result to a file
+			// write result to the output file
 			_, err = outputFile.WriteString(fmt.Sprintln(median.GetMedian()))
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "faile to write to file: %s", err)
