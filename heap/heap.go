@@ -31,6 +31,15 @@ func (h *MaxHeap) Top() int {
 	return 0
 }
 
+func (h *MaxHeap) Index(x interface{}) int {
+	for i := 0; i < h.Len(); i++ {
+		if x == (*h)[i] {
+			return i
+		}
+	}
+	return -1
+}
+
 func NewMaxHeap() *MaxHeap {
 	pq := &MaxHeap{}
 	heap.Init(pq)
@@ -62,6 +71,15 @@ func (h *MinHeap) Top() int {
 		return int(a[0])
 	}
 	return 0
+}
+
+func (h *MinHeap) Index(x interface{}) int {
+	for i := 0; i < h.Len(); i++ {
+		if x == (*h)[i] {
+			return i
+		}
+	}
+	return -1
 }
 
 func NewMinHeap() *MinHeap {
