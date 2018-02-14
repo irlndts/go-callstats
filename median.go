@@ -37,10 +37,10 @@ func (m *Median) AddDelay(delay int) {
 
 	// add value to the max heap
 	heap.Push(m.maxHeap, delay)
+
+	// balance max and min heaps
 	heap.Push(m.minHeap, m.maxHeap.Top())
 	heap.Pop(m.maxHeap)
-
-	// balance max and min heap
 	if m.maxHeap.Len() < m.minHeap.Len() {
 		heap.Push(m.maxHeap, m.minHeap.Top())
 		heap.Pop(m.minHeap)
