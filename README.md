@@ -18,7 +18,8 @@ Test 1 is implemented via TestGetMedian in median_test.go
 #### Time complexity:
 At worst, there are three heap insertions and two heap deletions from the top for min-max heaps + deletion after slider is full. After Each of these takes about O(log(n)) time. Finding the mean takes constant O(1) time since the tops of heaps are directly accessible.
 We also need to insert and delete from queue - it's O(2*log(n)).
-So the result is o(8*log(n) + O(1)) ≈ `O(log(n))`
+And also there is up to O(slider size/2) to find an index of the element to remove.
+So the result is O(8*log(n) + O(slider/2) + O(1)) ≈ `O(log(n))`
 
 #### Space
 `O(2 * size of slider)` - we keep data in queue and in heaps separately, and we don't need to keep more than slider requeres. It's linear.
